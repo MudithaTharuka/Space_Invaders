@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # Initializing the pygame
 pygame.init()
@@ -17,8 +18,17 @@ playerX = 668
 playerY = 620
 playerXchange = 0
 
+# Enemy
+enemyImage = pygame.image.load("main_enemy.png")
+enemyX = random.randint(0, 1336)
+enemyY = random.randint(50, 200)
+enemyXchange = 0
+
 def player(x, y):
     screen.blit(playerImage, (x, y))
+
+def enemy(x, y):
+    screen.blit(enemyImage, (x, y))
 
 # Game loop [Infinite loop]
 running = True
@@ -35,10 +45,10 @@ while running:
         if event.type == pygame.KEYDOWN:
             # Left movement of the ship
             if event.key == pygame.K_a:
-                playerXchange = -0.3
+                playerXchange = -0.8
             # Right movement of the ship
             if event.key == pygame.K_d:
-                playerXchange = 0.3      
+                playerXchange = 0.8      
 
         # Check whether the an moving key is relesing
         if event.type == pygame.KEYUP:
@@ -47,9 +57,18 @@ while running:
                 playerXchange = 0
 
 
-    # player 
+    # player moves
     playerX += playerXchange # Is there any movement
+    # Define the bounderies and control the movement of spaceship out of them
+    if playerX <= 0:
+        playerX = 0
+    elif playerX >= 1336:
+        playerX = 1336
+    # player
     player(playerX, playerY)
+
+    # Enemy
+    enemy(enemyX, enemyY)
 
     # Updating everything inside the game window
     pygame.display.update()
