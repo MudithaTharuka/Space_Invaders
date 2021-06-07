@@ -1,0 +1,20 @@
+s = input()
+li_split = s.split()
+print("\n")
+li = []
+dis = []
+ignore = ""
+print(int(li_split[0])*2)
+for i in range(int(li_split[0])*2 - 1):
+    li[i] = input()
+    ignore = input()
+
+for j in range(int(li_split[1])*2):
+    dis[j] = input()
+    if(j%2) == 0:
+        ignore = input()
+    else:
+        print("\n")
+
+for k in range(Q,2):
+    print(li[k]+li[k+1])
